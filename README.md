@@ -23,7 +23,7 @@ The smart contract `Forwarder.sol` extends the EIP712 and entails the following 
 
 - `verify`: Verifies the signature based on the typed structured data.
 
-```
+```solidity
 function verify(MetaTx calldata _tx, bytes calldata _signature) internal view returns (bool) {
     address signer = _hashTypedDataV4(
         keccak256(abi.encode(_TYPEHASH, _tx.from, _tx.to, _tx.token, _tx.amount, _tx.nonce))
@@ -34,7 +34,8 @@ function verify(MetaTx calldata _tx, bytes calldata _signature) internal view re
 ```
 
 - `batchTransfer` Executes meta transactions in batches. If one transaction is invalid or has a malformed signature, the process continues as long as the remaining transactions are valid.
-```
+
+```solidity
 function batchTransfer(MetaTxWithSig[] calldata _metaTxWithSig, uint256 gas) external onlyOwner {
     uint256 transactionsLength = _metaTxWithSig.length;
 
@@ -56,7 +57,7 @@ function batchTransfer(MetaTxWithSig[] calldata _metaTxWithSig, uint256 gas) ext
 
 Here's the sample implementation of ERC20 Permit
 
-```
+```solidity
 contract Token1 is ERC20, ERC20Permit {
     constructor() ERC20("Token1", "T1") ERC20Permit("Token1") {
         _mint(msg.sender, 1000000 * 10 ** 18);
@@ -73,33 +74,39 @@ For this project to function, [Redis](https://redis.io/download/) must be instal
 After you clone the repository, change your directory to the project's directory and run the following commands:
 
 #### 1. Copy the environment variables from `frontend` and `relayer` workspaces
-```
+
+```bash
 cp frontend/.env.development frontend/.env
 cp relayer/.env.development relayer/.env
 ```
 
 #### 2. Install npm modules
-```
+
+```bash
 yarn install
 ```
 
 #### 3. Start the Redis server. In your terminal simply run:
-```
+
+```bash
 redis-server
 ```
 
 #### 4. Start [Hardhat](https://hardhat.org/) local node server. Open a new tab in your terminal, change directory to the `contracts` folder and simply run:
-```
+
+```bash
 npx hardhat node
 ```
 
 #### 5. Deploy the smart contracts. Open a new tab in your terminal, simply run:
-```
+
+```bash
 yarn contracts:deploy:localhost
 ```
 
 It should display something like this in your terminal.
-```
+
+```bash
 Forwarder deployed to: 0x...123
 Token1 whitelisted and deployed to 0x...123
 Token2 whitelisted and deployed to 0x...123
@@ -109,18 +116,21 @@ Token3 whitelisted and deployed to 0x...123
 #### 6. Setup the environment variables
 
 In the relayer workspace, copy and paste the deployed forwarder contract address, along with the private key of Hardhat's deployer, typically designated as account index 0.
-```
+
+```bash
 FORWARDER_LOCALHOST_ADDRESS=
 PRIV_KEY=
 ```
 
 In the `frontend` workspace, copy and paste as well the forwarder contract address.
-```
+
+```bash
 NEXT_PUBLIC_FORWARDER_LOCALHOST_ADDRESS
 ```
 
 Same in the `frontend` workspace, copy and paste the tokens address in the `blockchain.ts` file under the `utils` folder.
-```
+
+```javascript
 token: {
     tokens: [
         {
@@ -149,12 +159,14 @@ token: {
 ```
 
 #### 7. Open and new tab and run the `relayer` server
-```
+
+```bash
 yarn relayer:dev
 ```
 
 #### 8. Open and new tab and run the `frontend`
-```
+
+```bash
 yarn frontend:dev
 ```
 
@@ -166,7 +178,7 @@ We utilize [Hardhat](https://hardhat.org/) given its robust capabilities for tes
 
 To run the test suite. Simply run:
 
-```
+```bash
 yarn contracts:test
 ```
 
