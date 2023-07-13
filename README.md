@@ -115,20 +115,20 @@ Token3 whitelisted and deployed to 0x...123
 
 #### 6. Setup the environment variables
 
-In the relayer workspace, copy and paste the deployed forwarder contract address, along with the private key of Hardhat's deployer, typically designated as account index 0.
+In the relayer workspace, copy and paste the deployed `forwarder` contract address, along with the private key of Hardhat's deployer, typically designated as account index 0.
 
 ```bash
 FORWARDER_LOCALHOST_ADDRESS=
 PRIV_KEY=
 ```
 
-In the `frontend` workspace, copy and paste as well the forwarder contract address.
+In the `frontend` workspace, copy and paste as well the `forwarder` contract address.
 
 ```bash
 NEXT_PUBLIC_FORWARDER_LOCALHOST_ADDRESS
 ```
 
-Same in the `frontend` workspace, copy and paste the tokens address in the `blockchain.ts` file under the `utils` folder.
+Same in the `frontend` workspace, copy and paste the tokens addresses in the `blockchain.ts` file under the `utils` folder.
 
 ```javascript
 token: {
@@ -158,19 +158,19 @@ token: {
 }
 ```
 
-#### 7. Open and new tab and run the `relayer` server
+#### 7. Open a new tab in your terminal and run the `relayer` server
 
 ```bash
 yarn relayer:dev
 ```
 
-#### 8. Open and new tab and run the `frontend`
+#### 8. Open a new tab in your terminal and run the `frontend`
 
 ```bash
 yarn frontend:dev
 ```
 
-#### 9. In your browser, navigate to `localhost:3000`. And that's is you successfully run the project. Have fun! 😄
+#### 9. In your browser, navigate to `localhost:3000`, and that's it you successfully run the project. Have fun! 😄
 
 # 🧪 Unit Tests
 
@@ -223,3 +223,9 @@ Here's the sample report from the contract's test suite
 # 📜 License
 
 This project is licensed under [GNU General Public License v3](https://opensource.org/license/gpl-3-0/).
+
+# Thank you!
+
+If this project interests you, follow me on Twitter
+
+[![Kennie Harold](https://img.shields.io/badge/twitter-08A0E9?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/eikenn99)
