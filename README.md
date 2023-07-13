@@ -224,7 +224,7 @@ Here's the sample report from the contract's test suite
 
 This project is licensed under [GNU General Public License v3](https://opensource.org/license/gpl-3-0/).
 
-# Thank you!
+# 💜 Thank you!
 
 If this project interests you, follow me on Twitter
 
