@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background: 35, 0, 43;
+  --background-start-rgb: 35, 0, 43, 1;
+  --background-end-rgb: 0, 0, 0, 1;
+}
+
+* {
+  font-family: 'Inter custom', sans-serif;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+select::after {
+  content: '▼';
+  position: absolute;
+  right: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: radial-gradient(
+    circle,
+    rgba(var(--background-start-rgb)) 10%,
+    rgba(var(--background-end-rgb)) 100%
+  );
+}

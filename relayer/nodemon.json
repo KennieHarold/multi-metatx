@@ -1,0 +1,12 @@
+{
+  "restartable": "rs",
+  "watch": ["src"],
+  "ext": "ts,json",
+  "events": {
+    "start": "clear"
+  },
+  "ignore": [".git", "node_modules/", "build/", "src/**/*.spec.ts"],
+  "execMap": {
+    "ts": "node -r ts-node/register"
+  }
+}

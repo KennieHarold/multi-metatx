@@ -1,0 +1,6 @@
+{
+  "solidity.defaultCompiler": "localFile",
+  "solidity.remappingsUnix": ["@openzeppelin/=node_modules/@openzeppelin/"],
+  "solidity.compileUsingRemoteVersion": "latest",
+  "cSpell.words": ["MMSDK", "Numberish"]
+}

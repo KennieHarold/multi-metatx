@@ -1,0 +1,23 @@
+{
+  "name": "multi-metatx",
+  "author": "Kennie Harold Mantac",
+  "scripts": {
+    "contracts:test": "npm exec --workspace contracts npm run test",
+    "contracts:deploy:localhost": "npm exec --workspace contracts npm run deploy:localhost",
+    "relayer:build": "npm exec --workspace relayer npm run build",
+    "relayer:start": "npm exec --workspace relayer npm start",
+    "relayer:dev": "npm exec --workspace relayer npm run dev",
+    "frontend:dev": "npm exec --workspace frontend npm run dev",
+    "clean": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "dotenv": "^16.1.4",
+    "hardhat": "^2.14.0"
+  },
+  "workspaces": [
+    "contracts",
+    "relayer",
+    "frontend"
+  ]
+}
