@@ -39,14 +39,17 @@ export function validateTransactionBody(body: Transaction) {
   return true;
 }
 
-export function validateMessage(
-  domain: TypedDataDomain,
-  types: Record<string, TypedDataField[]>,
-  nonce: number,
-  signature: SignatureLike,
-  data: Record<string, any>,
-  from: string
-) {
+interface ValidateMessagePayload {
+  domain: TypedDataDomain;
+  types: Record<string, TypedDataField[]>;
+  nonce: number;
+  signature: SignatureLike;
+  data: Record<string, any>;
+  from: string;
+}
+
+export function validateMessage(payload: ValidateMessagePayload) {
+  const { domain, types, nonce, signature, data, from } = payload;
   const signer = ethers.verifyTypedData(domain, types, data, signature);
   return nonce === data?.nonce && signer === from;
 }
@@ -55,7 +58,9 @@ export function getContract(address: string, abi: any[]) {
   const privKey = config.get<string>('privKey');
   const rpcUrl = config.get<string>('rpcUrl');
 
-  if (!privKey) throw new Error('Admin PK not set');
+  if (!privKey) {
+    throw new Error('Admin PK not set');
+  }
 
   const provider = new ethers.JsonRpcProvider(rpcUrl);
   const signer = new ethers.Wallet(privKey, provider);

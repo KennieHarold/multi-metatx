@@ -20,9 +20,7 @@ const forwarderAddress = contract.address[defaultNetwork as AllowedNetworks] as 
 router.post('/', async function (req: Request<{}, {}, Transaction>, res: Response) {
   try {
     if (!validateTransactionBody(req.body)) {
-      log.info(
-        `Malformed message: Incomplete or invalid request body ${JSON.stringify(req.body)}}`
-      );
+      log.info(`Malformed message: Incomplete or invalid request body ${JSON.stringify(req.body)}`);
       return res.status(400).send('Malformed message');
     }
 
@@ -40,26 +38,25 @@ router.post('/', async function (req: Request<{}, {}, Transaction>, res: Respons
       verifyingContract: targetToken.address
     };
 
-    const isMetaTxTypedDataValid = validateMessage(
-      eip712.metaTx.domain,
-      eip712.metaTx.types,
-      metaTxNonce,
-      metaTx.signature,
-      metaTxValues,
-      metaTxValues.from
-    );
-
-    const isTokenPermitTypedDataValid = validateMessage(
-      erc20PermitDomain,
-      eip712.erc20Permit.types,
-      tokenPermitNonce,
-      tokenPermit.signature,
-      erc20PermitValues,
-      tokenPermit.owner
-    );
+    const isMetaTxTypedDataValid = validateMessage({
+      domain: eip712.metaTx.domain,
+      types: eip712.metaTx.types,
+      nonce: metaTxNonce,
+      signature: metaTx.signature,
+      data: metaTxValues,
+      from: metaTxValues.from
+    });
+    const isTokenPermitTypedDataValid = validateMessage({
+      domain: erc20PermitDomain,
+      types: eip712.erc20Permit.types,
+      nonce: tokenPermitNonce,
+      signature: tokenPermit.signature,
+      data: erc20PermitValues,
+      from: tokenPermit.owner
+    });
 
     if (!(isMetaTxTypedDataValid && isTokenPermitTypedDataValid)) {
-      log.info(`Malformed message: TypedData not valid ${JSON.stringify(req.body)}}`);
+      log.info(`Malformed message: TypedData not valid ${JSON.stringify(req.body)}`);
       return res.status(400).send('Malformed message');
     }
 
@@ -90,12 +87,10 @@ router.post('/', async function (req: Request<{}, {}, Transaction>, res: Respons
     };
 
     RedisService.getInstance().client?.set(redisId, JSON.stringify(serializedBody));
-    log.info(`Successfully posted transaction with data ${JSON.stringify(req.body)}}`);
+    log.info(`Successfully posted transaction with data ${JSON.stringify(req.body)}`);
     return res.status(201).send('Success!');
-
-    // prettier-ignore
-  } catch (error: any) {
-    reportError(error, 'Error on post transaction');
+  } catch (error: unknown) {
+    reportError(error as Error, 'Error on post transaction');
     return res.status(500).send('Internal server error');
   }
 });
